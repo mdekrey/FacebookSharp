@@ -69,7 +69,7 @@ namespace FacebookSharp.UnitTest
         [TestMethod()]
         public void VerifyTest()
         {
-            FacebookSignature target = new FacebookSignature("3221a15c4e2804c04da31670a7b64516", new Dictionary<string, string>()
+            FacebookSignature target = new FacebookSignature(new Dictionary<string, string>()
 {
     { "in_canvas", "1" },
     { "request_method", "GET" },
@@ -84,7 +84,7 @@ namespace FacebookSharp.UnitTest
     { "session_key", "9a7e04226b1a3c85823bfafd-2901279" },
     { "expires", "0" },
     { "api_key", "650503b8455d7ae1cd4524da50d88129" },
-});
+}) { Signature = "3221a15c4e2804c04da31670a7b64516" };
             bool expected = true; 
             bool actual;
             actual = target.Verify("86cd871c996910064ab9884459c58bab");

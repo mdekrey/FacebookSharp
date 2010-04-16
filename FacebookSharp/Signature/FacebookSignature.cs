@@ -15,18 +15,16 @@ namespace FacebookSharp.Signature
         {
         }
 
-        public FacebookSignature(string signature, params KeyValuePair<string, string>[] items)
+        public FacebookSignature(params KeyValuePair<string, string>[] items)
         {
-            Signature = signature;
             foreach (var i in items)
             {
                 this.Add(i.Key, i.Value);
             }
         }
 
-        public FacebookSignature(string signature, Dictionary<string, string> items)
+        public FacebookSignature(Dictionary<string, string> items)
         {
-            Signature = signature;
             foreach (var i in items)
             {
                 this.Add(i.Key, i.Value);
@@ -35,11 +33,24 @@ namespace FacebookSharp.Signature
 
         public string Signature { get; set; }
 
-        public bool Verify(string secret)
+        public void Calculate(string secret)
         {
-            string signatureString = string.Join("", this.Keys.OrderBy(k => k)
+            string signatureString = GetSignatureString(); 
+            Signature = GetMD5Hash(signatureString + secret);
+        }
+
+        private string GetSignatureString()
+        {
+            return string.Join("", this.Keys
+                .Where(k => k != "app_key") 
+                .OrderBy(k => k)
                 .Select(k => k + "=" + this[k])
                 .ToArray());
+        }
+
+        public bool Verify(string secret)
+        {
+            string signatureString = GetSignatureString();
             return Signature == GetMD5Hash(signatureString + secret);
         }
 
