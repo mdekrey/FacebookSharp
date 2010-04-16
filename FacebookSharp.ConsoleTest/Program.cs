@@ -9,9 +9,6 @@ namespace FacebookSharp.ConsoleTest
     {
         static void Main(string[] args)
         {
-            string temp = @"{""application_name"":""Tribal Game of Thrones"",""ip_list"":""""}";
-            var final = Methods.JsonBase.BaseParse(new System.IO.StringReader(temp));
-
             Console.Write("ApiKey: ");
             string apiKey = Console.ReadLine();
             string secret;
