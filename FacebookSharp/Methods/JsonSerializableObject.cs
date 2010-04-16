@@ -7,9 +7,9 @@ using System.IO;
 
 namespace FacebookSharp.Methods
 {
-    public class FacebookArgumentObject : FacebookArgumentBase
+    public class JsonSerializableObject : JsonBase
     {
-        public FacebookArgumentObject(object value)
+        public JsonSerializableObject(object value)
         {
             Value = value;
         }

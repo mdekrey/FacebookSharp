@@ -53,9 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookApi.cs" />
-    <Compile Include="Methods\FacebookArgumentObject.cs" />
-    <Compile Include="Methods\FacebookArgumentBase.cs" />
-    <Compile Include="Methods\FacebookArgumentString.cs" />
+    <Compile Include="Methods\JsonCustomArray.cs" />
+    <Compile Include="Methods\JsonCustomObject.cs" />
+    <Compile Include="Methods\JsonSerializableObject.cs" />
+    <Compile Include="Methods\JsonBase.cs" />
+    <Compile Include="Methods\JsonString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signature\FacebookSignature.cs" />
   </ItemGroup>

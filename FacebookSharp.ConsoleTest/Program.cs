@@ -9,6 +9,9 @@ namespace FacebookSharp.ConsoleTest
     {
         static void Main(string[] args)
         {
+            string temp = @"{""application_name"":""Tribal Game of Thrones"",""ip_list"":""""}";
+            var final = Methods.JsonBase.BaseParse(new System.IO.StringReader(temp));
+
             Console.Write("ApiKey: ");
             string apiKey = Console.ReadLine();
             string secret;
@@ -24,10 +27,12 @@ namespace FacebookSharp.ConsoleTest
             }
 
             FacebookApi fbApi = new FacebookApi(apiKey, secret);
-            string result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.FacebookArgumentBase>()
+            string result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
-                { "properties", Methods.FacebookArgumentBase.Create(new string[] { "application_name", "ip_list" }) },
+                { "properties", Methods.JsonBase.Create(new string[] { "application_name", "ip_list" }) },
             }, false);
+            string json = ((Methods.JsonString)Methods.JsonBase.BaseParse(new System.IO.StringReader(result))).Value;
+            final = Methods.JsonBase.BaseParse(new System.IO.StringReader(json));
         }
     }
 }

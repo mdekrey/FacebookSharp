@@ -28,12 +28,12 @@ namespace FacebookSharp
             this.secret = secret;
         }
 
-        public string Call(string facebookMethod, Dictionary<string, Methods.FacebookArgumentBase> arguments, bool ssl)
+        public string Call(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl)
         {
             Dictionary<string, string> actualArgs = new Dictionary<string, string>();
             foreach (var arg in arguments)
             {
-                actualArgs[arg.Key] = arg.Value.ToJsonString();
+                actualArgs[arg.Key] = FacebookSharp.Methods.JsonBase.SafeSerialize(arg.Value);
             }
             actualArgs["api_key"] = apiKey;
             if (session != null)
