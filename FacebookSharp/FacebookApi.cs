@@ -28,7 +28,7 @@ namespace FacebookSharp
             this.secret = secret;
         }
 
-        public string Call(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl)
+        public Methods.JsonBase Call(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl)
         {
             Dictionary<string, string> actualArgs = new Dictionary<string, string>();
             foreach (var arg in arguments)
@@ -64,7 +64,7 @@ namespace FacebookSharp
                     Stream responseStream = webResponse.GetResponseStream();
                     StreamReader sr = new StreamReader(responseStream);
 
-                    return sr.ReadToEnd();
+                    return Methods.JsonBase.BaseParse(new System.IO.StringReader(Methods.JsonString.Parse(sr).Value));
                 }
             }
         }

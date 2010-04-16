@@ -24,7 +24,7 @@ namespace FacebookSharp.Methods
             return "'" + v.Replace("\\", "\\\\").Replace("'", "\\'") + "'";
         }
 
-        internal static JsonString Parse(System.IO.TextReader json)
+        public static JsonString Parse(System.IO.TextReader json)
         {
             char startString = (char)json.Read();
             StringBuilder sb = new StringBuilder();

@@ -27,12 +27,11 @@ namespace FacebookSharp.ConsoleTest
             }
 
             FacebookApi fbApi = new FacebookApi(apiKey, secret);
-            string result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
+            var result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
                 { "properties", Methods.JsonBase.Create(new string[] { "application_name", "ip_list" }) },
             }, false);
-            string json = ((Methods.JsonString)Methods.JsonBase.BaseParse(new System.IO.StringReader(result))).Value;
-            final = Methods.JsonBase.BaseParse(new System.IO.StringReader(json));
+            
         }
     }
 }
