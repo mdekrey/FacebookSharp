@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace FacebookSharp.ConsoleTest
 {
@@ -41,7 +42,24 @@ namespace FacebookSharp.ConsoleTest
                 { "uids", Methods.JsonBase.Create(44400541) },
                 { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
             }, false, out statusCode);
-            
+
+            var result3 = fbApi.Call<StandardInfo[]>("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
+            {
+                { "uids", Methods.JsonBase.Create(44400541) },
+                { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
+            }, false, out statusCode);
+
+        }
+
+        [DataContract]
+        public class StandardInfo
+        {
+            [DataMember(Name = "first_name")]
+            public string FirstName { get; set; }
+            [DataMember(Name = "last_name")]
+            public string LastName { get; set; }
+            [DataMember(Name = "uid")]
+            public Int64 UserId { get; set; }
         }
 
         public static void GetApiKeys(string name, out string apiKey, out string appSecret)
