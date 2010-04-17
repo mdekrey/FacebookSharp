@@ -43,11 +43,13 @@ namespace FacebookSharp
 
         public T Call<T>(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl, out HttpStatusCode statusCode)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-            using (MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(CallReturnRawJson(facebookMethod, arguments, ssl, out statusCode))))
+            string rawJson = CallReturnRawJson(facebookMethod, arguments, ssl, out statusCode);
+            Methods.Errors.FacebookError errorObj = JsonSerializationHelper.FromJsonString<Methods.Errors.FacebookError>(rawJson);
+            if (errorObj.ErrorCode != 0)
             {
-                return (T)serializer.ReadObject(ms);
+                throw new Methods.Errors.InvalidCallException(errorObj);
             }
+            return JsonSerializationHelper.FromJsonString<T>(rawJson);
         }
 
         protected string CallReturnRawJson(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl, out HttpStatusCode statusCode)

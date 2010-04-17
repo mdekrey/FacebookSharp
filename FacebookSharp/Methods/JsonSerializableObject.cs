@@ -18,17 +18,7 @@ namespace FacebookSharp.Methods
 
         public override string ToJsonString()
         {
-            if (Value == null)
-            {
-                return "null";
-            }
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(Value.GetType());
-            using (MemoryStream ms = new MemoryStream())
-            {
-                serializer.WriteObject(ms, Value);
-                string json = Encoding.Default.GetString(ms.ToArray());
-                return json;
-            }
+            return JsonSerializationHelper.ToJsonString(Value);
         }
     }
 }

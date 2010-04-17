@@ -57,6 +57,10 @@
     <Compile Include="Configuration\ApplicationSettingsCollection.cs" />
     <Compile Include="Configuration\ConfigurationSection.cs" />
     <Compile Include="FacebookApi.cs" />
+    <Compile Include="JsonSerializationHelper.cs" />
+    <Compile Include="Methods\Errors\Argument.cs" />
+    <Compile Include="Methods\Errors\FacebookError.cs" />
+    <Compile Include="Methods\Errors\InvalidCallException.cs" />
     <Compile Include="Methods\JsonCustomArray.cs" />
     <Compile Include="Methods\JsonCustomObject.cs" />
     <Compile Include="Methods\JsonNumber.cs" />

@@ -36,20 +36,61 @@ namespace FacebookSharp.ConsoleTest
             {
                 { "properties", Methods.JsonBase.Create(new string[] { "application_name", "ip_list" }) },
             }, false, out statusCode);
+            Console.WriteLine(result.ToJsonString());
+            Console.WriteLine();
+
+            try
+            {
+                var errorResult = fbApi.Call<StandardInfo[]>("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
+                {
+                    { "uids", Methods.JsonBase.Create("44400541") },
+                    { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
+                }, false, out statusCode);
+                DisplayStandardInfo(errorResult);
+            }
+            catch (Methods.Errors.InvalidCallException ex)
+            {
+                DisplayException(ex);
+            }
+            Console.WriteLine();
 
             var result2 = fbApi.Call("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
                 { "uids", Methods.JsonBase.Create(44400541) },
                 { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
             }, false, out statusCode);
+            Console.WriteLine(result2.ToJsonString());
+            Console.WriteLine();
 
             var result3 = fbApi.Call<StandardInfo[]>("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
                 { "uids", Methods.JsonBase.Create(44400541) },
                 { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
             }, false, out statusCode);
+            DisplayStandardInfo(result3);
+            Console.WriteLine();
 
+            Console.ReadLine();
         }
+
+        private static void DisplayException(FacebookSharp.Methods.Errors.InvalidCallException ex)
+        {
+            Console.WriteLine("({0}): {1}", ex.ErrorCode, ex.Message);
+            Console.WriteLine(ex.ToString());
+        }
+
+        private static void DisplayStandardInfo(StandardInfo[] result)
+        {
+            Console.WriteLine("uid\tfirst_name\tlast_name");
+            foreach (var si in result)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", si.UserId, si.FirstName, si.LastName);
+            }
+        }
+
+        
+
+        
 
         [DataContract]
         public class StandardInfo
