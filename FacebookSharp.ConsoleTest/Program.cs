@@ -70,6 +70,14 @@ namespace FacebookSharp.ConsoleTest
             DisplayStandardInfo(result3);
             Console.WriteLine();
 
+            var result4 = fbApi.Call<StandardInfo[]>("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
+            {
+                { "uids", Methods.JsonBase.Create(new Int64[] { 44400541 }) },
+                { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
+            }, false, out statusCode);
+            DisplayStandardInfo(result4);
+            
+
             Console.ReadLine();
         }
 
