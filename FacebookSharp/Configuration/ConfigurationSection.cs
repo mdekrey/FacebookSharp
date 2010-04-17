@@ -27,6 +27,22 @@ namespace FacebookSharp.Configuration
             return Applications.OfType<ApplicationSettings>().FirstOrDefault(app => app.ApiKey == apiKey);
         }
 
+        private string[] apiKeys = null;
+        public string[] ApiKeys
+        {
+            get
+            {
+                if (apiKeys == null)
+                {
+                    apiKeys = Applications
+                        .OfType<ApplicationSettings>()
+                        .Select(app => app.ApiKey)
+                        .ToArray();
+                }
+                return apiKeys;
+            }
+        }
+
         #region Static
 
         private static ConfigurationSection instance;

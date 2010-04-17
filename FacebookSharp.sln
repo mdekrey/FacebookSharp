@@ -14,6 +14,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookSharp.UnitTest", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookSharp.ConsoleTest", "FacebookSharp.ConsoleTest\FacebookSharp.ConsoleTest.csproj", "{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookSharp.Web", "FacebookSharp.Web\FacebookSharp.Web.csproj", "{37130F7F-81B8-4367-BB79-F209BCA8F8F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E2D444D1-AED8-4763-867D-5BCFF5B90373}"
+	ProjectSection(SolutionItems) = preProject
+		README = README
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}"
+	ProjectSection(SolutionItems) = preProject
+		FacebookSharp.vsmdi = FacebookSharp.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FacebookSharp.vsmdi
@@ -35,8 +48,18 @@ Global
 		{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3E48A4E-1A0E-4497-9C9F-99FF376997F5} = {E2D444D1-AED8-4763-867D-5BCFF5B90373}
+		{37130F7F-81B8-4367-BB79-F209BCA8F8F0} = {E2D444D1-AED8-4763-867D-5BCFF5B90373}
+		{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8} = {8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}
+		{4976F41B-0F33-4E97-A48F-A276CBF9AB67} = {8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}
 	EndGlobalSection
 EndGlobal

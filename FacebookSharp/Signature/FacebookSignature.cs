@@ -42,7 +42,6 @@ namespace FacebookSharp.Signature
         private string GetSignatureString()
         {
             return string.Join("", this.Keys
-                .Where(k => k != "app_key") 
                 .OrderBy(k => k)
                 .Select(k => k + "=" + this[k])
                 .ToArray());
