@@ -59,6 +59,7 @@
     <Compile Include="FacebookApi.cs" />
     <Compile Include="Methods\JsonCustomArray.cs" />
     <Compile Include="Methods\JsonCustomObject.cs" />
+    <Compile Include="Methods\JsonNumber.cs" />
     <Compile Include="Methods\JsonSerializableObject.cs" />
     <Compile Include="Methods\JsonBase.cs" />
     <Compile Include="Methods\JsonString.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Web;
 using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace FacebookSharp
 {
@@ -34,7 +35,22 @@ namespace FacebookSharp
             this.secret = secret;
         }
 
-        public Methods.JsonBase Call(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl)
+        public Methods.JsonBase Call(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl, out HttpStatusCode statusCode)
+        {
+            string raw = CallReturnRawJson(facebookMethod, arguments, ssl, out statusCode);
+            return Methods.JsonBase.BaseParse(new System.IO.StringReader(raw));
+        }
+
+        public T Call<T>(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl, out HttpStatusCode statusCode)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            using (MemoryStream ms = new MemoryStream(Encoding.Default.GetBytes(CallReturnRawJson(facebookMethod, arguments, ssl, out statusCode))))
+            {
+                return (T)serializer.ReadObject(ms);
+            }
+        }
+
+        protected string CallReturnRawJson(string facebookMethod, Dictionary<string, Methods.JsonBase> arguments, bool ssl, out HttpStatusCode statusCode)
         {
             Dictionary<string, string> actualArgs = new Dictionary<string, string>();
             foreach (var arg in arguments)
@@ -59,19 +75,23 @@ namespace FacebookSharp
             actualArgs["sig"] = sig.Signature;
 
             HttpWebRequest request = CreateRequest(ssl, facebookMethod, actualArgs);
-            using (HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse())
+            HttpWebResponse webResponse;
+            try
             {
-                if (webResponse.StatusCode != HttpStatusCode.OK)
-                {
-                    return null;
-                }
-                else
-                {
-                    Stream responseStream = webResponse.GetResponseStream();
-                    StreamReader sr = new StreamReader(responseStream);
+                webResponse = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                webResponse = (HttpWebResponse)ex.Response;
+            }
 
-                    return Methods.JsonBase.BaseParse(new System.IO.StringReader(Methods.JsonString.Parse(sr).Value));
-                }
+            using (webResponse)
+            {
+                statusCode = webResponse.StatusCode;
+                Stream responseStream = webResponse.GetResponseStream();
+                StreamReader sr = new StreamReader(responseStream);
+
+                return sr.ReadToEnd();
             }
         }
 

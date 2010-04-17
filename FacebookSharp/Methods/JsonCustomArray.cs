@@ -40,13 +40,14 @@ namespace FacebookSharp.Methods
         internal static JsonBase Parse(System.IO.TextReader json)
         {
             JsonCustomArray result = new JsonCustomArray();
-            json.Read();
             while (json.Peek() != ']')
             {
-                result.Properties.Add(JsonBase.BaseParse(json));
                 char comma = (char)json.Read();
-                System.Diagnostics.Debug.Assert(comma == ',');
+                System.Diagnostics.Debug.Assert(comma == ',' || comma == '[');
+                result.Properties.Add(JsonBase.BaseParse(json));
             }
+            char close = (char)json.Read();
+            System.Diagnostics.Debug.Assert(close == ']');
             return result;
         }
     }

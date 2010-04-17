@@ -26,10 +26,21 @@ namespace FacebookSharp.ConsoleTest
 
             FacebookApi fbApi = new FacebookApi(apiKey, secret);
             fbApi = new FacebookApi("consoleEntry");
+
+
+            System.Net.HttpStatusCode statusCode;
+            
+            // this call is weird because facebook double encodes the JSON
             var result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
                 { "properties", Methods.JsonBase.Create(new string[] { "application_name", "ip_list" }) },
-            }, false);
+            }, false, out statusCode);
+
+            var result2 = fbApi.Call("users.getStandardInfo", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
+            {
+                { "uids", Methods.JsonBase.Create(44400541) },
+                { "fields", Methods.JsonBase.Create(new string[] { "last_name", "first_name" }) },
+            }, false, out statusCode);
             
         }
 
