@@ -15,6 +15,12 @@ namespace FacebookSharp
         private string secret;
         private int callId = 0;
 
+        public FacebookApi(string applicationName)
+        {
+            this.apiKey = Configuration.ConfigurationSection.GetSection()[applicationName].ApiKey;
+            this.secret = Configuration.ConfigurationSection.GetSection()[applicationName].AppSecret;
+        }
+        
         public FacebookApi(string apiKey, string secret)
         {
             this.apiKey = apiKey;

@@ -7,11 +7,12 @@ namespace FacebookSharp.ConsoleTest
 {
     class Program
     {
+        static string apiKey;
+        static string secret;
         static void Main(string[] args)
         {
             Console.Write("ApiKey: ");
-            string apiKey = Console.ReadLine();
-            string secret;
+            apiKey = Console.ReadLine();
             if (apiKey.Split(' ').Length > 0)
             {
                 secret = apiKey.Split(' ')[1];
@@ -24,11 +25,18 @@ namespace FacebookSharp.ConsoleTest
             }
 
             FacebookApi fbApi = new FacebookApi(apiKey, secret);
+            fbApi = new FacebookApi("consoleEntry");
             var result = fbApi.Call("admin.getAppProperties", new Dictionary<string, FacebookSharp.Methods.JsonBase>()
             {
                 { "properties", Methods.JsonBase.Create(new string[] { "application_name", "ip_list" }) },
             }, false);
             
+        }
+
+        public static void GetApiKeys(string name, out string apiKey, out string appSecret)
+        {
+            apiKey = Program.apiKey;
+            appSecret = secret;
         }
     }
 }

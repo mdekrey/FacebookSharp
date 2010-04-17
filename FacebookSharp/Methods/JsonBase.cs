@@ -47,10 +47,11 @@ namespace FacebookSharp.Methods
                     return JsonString.Parse(json);
                 case '[':
                     return JsonCustomArray.Parse(json);
-                default:
+                default: // we hit some character we didn't recognize - if it's proper JSON, it's just whitespace.
                     json.Read();
                     return BaseParse(json);
             }
         }
+
     }
 }
