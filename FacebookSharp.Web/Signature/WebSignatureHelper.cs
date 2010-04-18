@@ -9,6 +9,7 @@ namespace FacebookSharp.Signature
     public static class WebSignatureHelper
     {
         const string fbCanvasPrefix = "fb_sig_";
+        const string fbCanvasApiKey = "fb_sig_api_key";
         const string fbCanvasSignature = "fb_sig";
         const string fbConnectPrefix = "fbsetting_";
 
@@ -20,7 +21,9 @@ namespace FacebookSharp.Signature
                 .ToArray();
             if (keys.Length > 0)
             {
-                return new FacebookSignature(keys.ToDictionary(k => k.Substring(fbCanvasPrefix.Length), k => request.QueryString[k])) { Signature = request.QueryString[fbCanvasSignature] };
+                var result = new FacebookSignature(keys.ToDictionary(k => k.Substring(fbCanvasPrefix.Length), k => request.QueryString[k])) { Signature = request.QueryString[fbCanvasSignature] };
+                result.Secret = Configuration.ConfigurationSection.GetSection().FindByApiKey(request.QueryString[fbCanvasApiKey]).AppSecret;
+                return result;
             }
 
             keys = request.Form.Keys
@@ -29,7 +32,9 @@ namespace FacebookSharp.Signature
                 .ToArray();
             if (keys.Length > 0)
             {
-                return new FacebookSignature(keys.ToDictionary(k => k.Substring(fbCanvasPrefix.Length), k => request.Form[k])) { Signature = request.Form[fbCanvasSignature] };
+                var result = new FacebookSignature(keys.ToDictionary(k => k.Substring(fbCanvasPrefix.Length), k => request.Form[k])) { Signature = request.Form[fbCanvasSignature] };
+                result.Secret = Configuration.ConfigurationSection.GetSection().FindByApiKey(request.Form[fbCanvasApiKey]).AppSecret;
+                return result;
             }
             
             return null;
@@ -58,7 +63,9 @@ namespace FacebookSharp.Signature
                 .ToArray();
             if (keys.Length > 0)
             {
-                return new FacebookSignature(keys.ToDictionary(k => k.Substring(apiKey.Length + 1), k => request.Cookies[k].Value)) { Signature = request.Form[apiKey] };
+                var result = new FacebookSignature(keys.ToDictionary(k => k.Substring(apiKey.Length + 1), k => request.Cookies[k].Value)) { Signature = request.Form[apiKey] };
+                result.Secret = Configuration.ConfigurationSection.GetSection().FindByApiKey(apiKey).AppSecret;
+                return result;
             }
 
             return null;

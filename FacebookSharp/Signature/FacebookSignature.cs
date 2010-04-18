@@ -9,48 +9,53 @@ namespace FacebookSharp.Signature
     /// Useful for verifying any and all signatures.
     /// See http://wiki.developers.facebook.com/index.php/Verifying_The_Signature
     /// </summary>
-    public class FacebookSignature : Dictionary<string, string>
+    public class FacebookSignature
     {
         public FacebookSignature()
         {
+            Values = new Dictionary<string, string>();
         }
 
-        public FacebookSignature(params KeyValuePair<string, string>[] items)
+        public FacebookSignature(params KeyValuePair<string, string>[] items) 
+            : this()
         {
             foreach (var i in items)
             {
-                this.Add(i.Key, i.Value);
+                Values.Add(i.Key, i.Value);
             }
         }
 
         public FacebookSignature(Dictionary<string, string> items)
+            : this()
         {
             foreach (var i in items)
             {
-                this.Add(i.Key, i.Value);
+                Values.Add(i.Key, i.Value);
             }
         }
 
+        public Dictionary<string, string> Values { get; private set; }
         public string Signature { get; set; }
+        public string Secret { private get; set; }
 
-        public void Calculate(string secret)
+        public void Calculate()
         {
             string signatureString = GetSignatureString(); 
-            Signature = GetMD5Hash(signatureString + secret);
+            Signature = GetMD5Hash(signatureString + Secret);
         }
 
         private string GetSignatureString()
         {
-            return string.Join("", this.Keys
+            return string.Join("", Values.Keys
                 .OrderBy(k => k)
-                .Select(k => k + "=" + this[k])
+                .Select(k => k + "=" + Values[k])
                 .ToArray());
         }
 
-        public bool Verify(string secret)
+        public bool Verify()
         {
             string signatureString = GetSignatureString();
-            return Signature == GetMD5Hash(signatureString + secret);
+            return Signature == GetMD5Hash(signatureString + Secret);
         }
 
         private string GetMD5Hash(string p)

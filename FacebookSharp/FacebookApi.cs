@@ -77,7 +77,8 @@ namespace FacebookSharp
             }
 
             Signature.FacebookSignature sig = new FacebookSharp.Signature.FacebookSignature(actualArgs);
-            sig.Calculate(secret);
+            sig.Secret = secret;
+            sig.Calculate();
             actualArgs["sig"] = sig.Signature;
 
             HttpWebRequest request = CreateRequest(ssl, facebookMethod, actualArgs);

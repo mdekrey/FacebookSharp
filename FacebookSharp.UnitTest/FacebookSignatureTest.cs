@@ -87,7 +87,8 @@ namespace FacebookSharp.UnitTest
 }) { Signature = "3221a15c4e2804c04da31670a7b64516" };
             bool expected = true; 
             bool actual;
-            actual = target.Verify("86cd871c996910064ab9884459c58bab");
+            target.Secret = "86cd871c996910064ab9884459c58bab";
+            actual = target.Verify();
             Assert.AreEqual(expected, actual);
         }
     }
