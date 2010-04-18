@@ -139,5 +139,10 @@ namespace FacebookSharp
                 return new Uri("http://api.facebook.com/bestserver.php");
             }
         }
+
+        public bool IsUserSession
+        {
+            get { return session != null; }
+        }
     }
 }
