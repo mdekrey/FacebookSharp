@@ -27,6 +27,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8BFDBDA3-5
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ConnectTest", "ConnectTest\", "{F6D8E595-1915-4006-9C5C-03E0A4B383AE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = "{37130F7F-81B8-4367-BB79-F209BCA8F8F0}|FacebookSharp.Web.dll;{C3E48A4E-1A0E-4497-9C9F-99FF376997F5}|FacebookSharp.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/ConnectTest"
+		Debug.AspNetCompiler.PhysicalPath = "ConnectTest\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ConnectTest\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ConnectTest"
+		Release.AspNetCompiler.PhysicalPath = "ConnectTest\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ConnectTest\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58524"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FacebookSharp.vsmdi
@@ -52,6 +74,10 @@ Global
 		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37130F7F-81B8-4367-BB79-F209BCA8F8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D8E595-1915-4006-9C5C-03E0A4B383AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D8E595-1915-4006-9C5C-03E0A4B383AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D8E595-1915-4006-9C5C-03E0A4B383AE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D8E595-1915-4006-9C5C-03E0A4B383AE}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +87,6 @@ Global
 		{37130F7F-81B8-4367-BB79-F209BCA8F8F0} = {E2D444D1-AED8-4763-867D-5BCFF5B90373}
 		{FA1BECCC-B6C7-4946-874E-CC0EC25C0EC8} = {8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}
 		{4976F41B-0F33-4E97-A48F-A276CBF9AB67} = {8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}
+		{F6D8E595-1915-4006-9C5C-03E0A4B383AE} = {8BFDBDA3-54A6-4B0C-AAD2-F12B85B9E451}
 	EndGlobalSection
 EndGlobal
