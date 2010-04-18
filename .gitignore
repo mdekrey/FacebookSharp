@@ -1,4 +1,5 @@
 *.suo
 */bin
+*/Bin
 */obj
 TestResults/*
