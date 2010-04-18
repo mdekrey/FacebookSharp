@@ -4,16 +4,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head runat="server">
-    <title></title>
+    <title>Testing page</title>
 </head>
 <body>
     <form id="form1" runat="server">
+        <fb:fbml ID="Fbml1" runat="server" Version="1.0"> 
     <div>
-        <fb:serverFbml style="width: 755px;" runat="server">  
-        <fb:fbml runat="server" Version="1.0"> 
-        </fb:fbml>
-        </fb:serverFbml>
+        <%--<fb:serverFbml style="width: 755px;" runat="server">  
+        Oh good, it worked.  But that's weird; the browser made a request to my server...?
+        </fb:serverFbml>--%>
+        Hello, <fb:name uid="loggedinuser" />!
+        <pre><asp:Label runat="server" ID="userAgent" /></pre>
     </div>
+        </fb:fbml>
     </form>
 </body>
 </html>

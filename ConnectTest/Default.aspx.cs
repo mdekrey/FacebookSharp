@@ -9,6 +9,10 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        foreach (string o in Request.Headers)
+        {
+            userAgent.Text += o.ToString() + ": " + Request.Headers[o] + "\r\n";
+        }
     }
+
 }

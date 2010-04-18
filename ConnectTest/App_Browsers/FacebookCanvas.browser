@@ -1,0 +1,8 @@
+﻿<browsers>
+  <browser refID="Default">
+    <controlAdapters>
+      <adapter controlType="System.Web.UI.Page"
+					 adapterType="FacebookSharp.Web.CanvasPageAdapter, FacebookSharp.Web" />
+    </controlAdapters>
+  </browser>
+</browsers>
