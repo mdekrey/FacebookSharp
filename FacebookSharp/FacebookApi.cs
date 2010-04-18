@@ -71,6 +71,10 @@ namespace FacebookSharp
             actualArgs["call_id"] = (callId++).ToString();
             actualArgs["format"] = "JSON";
             actualArgs["method"] = facebookMethod;
+            if (!string.IsNullOrEmpty(Locale))
+            {
+                actualArgs["locale"] = Locale;
+            }
 
             Signature.FacebookSignature sig = new FacebookSharp.Signature.FacebookSignature(actualArgs);
             sig.Calculate(secret);
@@ -144,5 +148,7 @@ namespace FacebookSharp
         {
             get { return session != null; }
         }
+
+        public string Locale { get; set; }
     }
 }
