@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Web\CanvasPageAdapter.cs" />
+    <Compile Include="Web\FBML\init.cs" />
     <Compile Include="Web\FBML\fbml.cs" />
     <Compile Include="Web\FBML\serverFbml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

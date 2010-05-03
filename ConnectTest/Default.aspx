@@ -10,9 +10,6 @@
     <form id="form1" runat="server">
         <fb:fbml ID="Fbml1" runat="server" Version="1.0"> 
     <div>
-        <%--<fb:serverFbml style="width: 755px;" runat="server">  
-        Oh good, it worked.  But that's weird; the browser made a request to my server...?
-        </fb:serverFbml>--%>
         Hello, <fb:name uid="loggedinuser" />!
         <pre><asp:Label runat="server" ID="userAgent" /></pre>
     </div>
